@@ -1,18 +1,17 @@
-# Hệ thống quản lý cây xanh
+# HỆ THỐNG QUẢN LÝ CÂY XANH
 
 ## Giới thiệu
 
-Đây là đồ án xây dựng hệ thống website quản lý cây xanh trong Trường Đại học Trà Vinh.
+Đây là đồ án xây dựng website quản lý cây xanh trong Trường Đại học Trà Vinh.
 
 ## Công nghệ sử dụng
 
 - ASP.NET Core MVC
 - Entity Framework Core
 - SQL Server
-- Bootstrap
-- Chart.js
+- Bootstrap 5
 - Leaflet
-- OpenStreetMap
+- Chart.js
 
 ## Chức năng
 
@@ -26,3 +25,7 @@
 - Thống kê
 - Cảnh báo
 - Xuất dữ liệu Excel
+
+## Tác giả
+
+Nguyễn Hoàng Nghĩa
