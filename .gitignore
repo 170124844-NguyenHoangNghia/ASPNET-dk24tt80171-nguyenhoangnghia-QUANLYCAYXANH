@@ -1,1 +1,14 @@
+# Build
+bin/
+obj/
 
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Publish
+publish/
+
+# Test
+TestResults/
