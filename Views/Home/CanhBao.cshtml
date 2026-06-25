@@ -1,0 +1,205 @@
+﻿@model IEnumerable<QUANLYCAYXANH.Models.ViewModels.CanhBaoChamSocVM>
+
+@{
+    ViewData["Title"] = "Cảnh báo chăm sóc cây xanh";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <h2>
+            ⚠ Danh sách cảnh báo cây xanh
+        </h2>
+
+        <a asp-controller="Home"
+           asp-action="ExportCanhBao"
+           class="btn btn-success">
+
+            📊 Xuất Excel
+
+        </a>
+
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-success">
+
+            <h5>✓ Không có cảnh báo</h5>
+
+            Tất cả cây xanh hiện đang được chăm sóc đúng quy định.
+
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+
+            <strong>Tổng số cảnh báo:</strong>
+            @Model.Count()
+
+        </div>
+
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th width="5%">STT</th>
+
+                    <th width="20%">Tên cây</th>
+
+                    <th width="15%">Khu vực</th>
+
+                    <th width="15%">Người phụ trách</th>
+
+                    <th width="20%">Loại cảnh báo</th>
+
+                    <th width="25%">Chi tiết</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @{
+                    int stt = 1;
+                }
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @stt
+                        </td>
+
+                        <td>
+                            @item.TenCay
+                        </td>
+
+                        <td>
+                            @item.KhuVuc
+                        </td>
+
+                        <td>@item.NguoiPhuTrach</td>
+
+                        <td>
+
+                            @if (item.LoaiCanhBao == "Cần chăm sóc")
+                            {
+                                <span class="badge bg-warning text-dark">
+
+                                    Cần chăm sóc
+
+                                </span>
+                            }
+                            else if (item.LoaiCanhBao == "Sâu bệnh")
+                            {
+                                <span class="badge bg-danger">
+
+                                    Sâu bệnh
+
+                                </span>
+                            }
+                            else if (item.LoaiCanhBao == "Quá hạn chăm sóc")
+                            {
+                                <span class="badge bg-danger">
+
+                                    Quá hạn chăm sóc
+
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">
+
+                                    @item.LoaiCanhBao
+
+                                </span>
+                            }
+
+                        </td>
+
+                        <td>
+
+                            @if (item.LoaiCanhBao == "Cần chăm sóc")
+                            {
+                                <span class="text-warning">
+
+                                    ⚠ Cây đang ở trạng thái cần chăm sóc.
+
+                                </span>
+                            }
+                            else if (item.LoaiCanhBao == "Sâu bệnh")
+                            {
+                                <span class="text-danger">
+
+                                    ⚠ Cây có dấu hiệu sâu bệnh, cần xử lý ngay.
+
+                                </span>
+                            }
+                            else if (item.LoaiCanhBao == "Quá hạn chăm sóc")
+                            {
+                                <span class="text-danger">
+
+                                    ⚠ Đã @item.SoNgay ngày chưa được chăm sóc.
+
+                                </span>
+                            }
+
+                        </td>
+
+                    </tr>
+
+                    stt++;
+                }
+
+            </tbody>
+
+        </table>
+
+        <div class="mt-3">
+
+            <div class="card">
+
+                <div class="card-header bg-danger text-white">
+
+                    Thống kê nhanh
+
+                </div>
+
+                <div class="card-body">
+
+                    <p>
+                        🔸 Cần chăm sóc:
+                        <strong>
+                            @Model.Count(x => x.LoaiCanhBao == "Cần chăm sóc")
+                        </strong>
+                    </p>
+
+                    <p>
+                        🔸 Quá hạn chăm sóc:
+                        <strong>
+                            @Model.Count(x => x.LoaiCanhBao == "Quá hạn chăm sóc")
+                        </strong>
+                    </p>
+
+                    <p>
+                        🔸 Sâu bệnh:
+                        <strong>
+                            @Model.Count(x => x.LoaiCanhBao == "Sâu bệnh")
+                        </strong>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>

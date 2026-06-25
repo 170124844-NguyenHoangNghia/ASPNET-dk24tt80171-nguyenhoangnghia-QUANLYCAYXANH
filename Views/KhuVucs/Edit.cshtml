@@ -1,0 +1,27 @@
+﻿@model QUANLYCAYXANH.Models.KhuVuc
+
+<h2>Sửa khu vực</h2>
+
+<form asp-action="Edit">
+
+    <input type="hidden" asp-for="MaKhuVuc" />
+
+    <div class="mb-3">
+        <label>Tên khu vực</label>
+        <input asp-for="TenKhuVuc" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Mô tả</label>
+        <input asp-for="MoTa" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-warning">
+        Cập nhật
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Quay lại
+    </a>
+
+</form>

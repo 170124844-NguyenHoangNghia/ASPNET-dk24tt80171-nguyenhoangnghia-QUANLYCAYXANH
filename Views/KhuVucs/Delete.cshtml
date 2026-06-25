@@ -1,0 +1,41 @@
+﻿@model QUANLYCAYXANH.Models.KhuVuc
+
+<h2>Xóa khu vực</h2>
+
+<h4>Bạn có chắc muốn xóa?</h4>
+
+<hr />
+
+<dl class="row">
+
+    <dt class="col-sm-3">
+        Tên khu vực
+    </dt>
+
+    <dd class="col-sm-9">
+        @Model.TenKhuVuc
+    </dd>
+
+    <dt class="col-sm-3">
+        Mô tả
+    </dt>
+
+    <dd class="col-sm-9">
+        @Model.MoTa
+    </dd>
+
+</dl>
+
+<form asp-action="Delete">
+
+    <input type="hidden" asp-for="MaKhuVuc" />
+
+    <button type="submit" class="btn btn-danger">
+        Xóa
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Hủy
+    </a>
+
+</form>

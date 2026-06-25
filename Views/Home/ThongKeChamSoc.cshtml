@@ -1,0 +1,130 @@
+﻿@{
+    ViewData["Title"] = "Thống kê chăm sóc";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<h2 class="mb-4">
+    📈 Thống kê lịch sử chăm sóc
+</h2>
+
+<div class="row mb-4">
+
+    <div class="col-md-6">
+
+        <div class="card border-primary shadow">
+
+            <div class="card-body text-center">
+
+                <h6>Tổng lượt chăm sóc</h6>
+
+                <h2 class="text-primary">
+
+                    @ViewBag.TongChamSoc
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="card border-success shadow">
+
+            <div class="card-body text-center">
+
+                <h6>Số tháng có dữ liệu</h6>
+
+                <h2 class="text-success">
+
+                    @ViewBag.SoThangCoDuLieu
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card shadow">
+
+    <div class="card-header bg-success text-white">
+
+        Biểu đồ số lượt chăm sóc theo tháng
+
+    </div>
+
+    <div class="card-body">
+
+        <canvas id="myChart"
+                height="90">
+        </canvas>
+
+    </div>
+
+</div>
+
+<script>
+
+    new Chart(
+    document.getElementById("myChart"),
+    {
+    type: "line",
+
+    data:
+    {
+    labels:
+    @Html.Raw(ViewBag.Labels),
+
+    datasets:
+    [{
+    label: "Lượt chăm sóc",
+
+    data:
+    @Html.Raw(ViewBag.Data),
+
+    borderColor: "#198754",
+
+    backgroundColor: "#198754",
+
+    fill: false,
+
+    tension: 0.3
+    }]
+    },
+
+    options:
+    {
+    responsive: true,
+
+    plugins:
+    {
+    legend:
+    {
+    display: false
+    }
+    },
+
+    scales:
+    {
+    y:
+    {
+    beginAtZero: true,
+
+    ticks:
+    {
+    precision: 0
+    }
+    }
+    }
+    }
+
+    });
+
+</script>

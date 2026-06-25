@@ -1,0 +1,148 @@
+﻿@{
+    ViewData["Title"] = "Thống kê theo tình trạng";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<h2 class="mb-4">
+    📈 Thống kê tình trạng cây xanh
+</h2>
+
+<div class="row mb-4">
+
+    <div class="col-md-3">
+
+        <div class="card border-primary shadow">
+
+            <div class="card-body text-center">
+
+                <h6>Tổng cây</h6>
+
+                <h2 class="text-primary">
+                    @ViewBag.TongCay
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card border-success shadow">
+
+            <div class="card-body text-center">
+
+                <h6>🌳 Tốt</h6>
+
+                <h2 class="text-success">
+                    @ViewBag.CayTot
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card border-warning shadow">
+
+            <div class="card-body text-center">
+
+                <h6>🟡 Cần chăm sóc</h6>
+
+                <h2 class="text-warning">
+                    @ViewBag.CayCanChamSoc
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card border-danger shadow">
+
+            <div class="card-body text-center">
+
+                <h6>🔴 Sâu bệnh</h6>
+
+                <h2 class="text-danger">
+                    @ViewBag.CaySauBenh
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card shadow">
+
+    <div class="card-header bg-success text-white">
+
+        Biểu đồ tình trạng cây xanh
+
+    </div>
+
+    <div class="card-body">
+
+        <div style="max-width:500px;margin:auto;">
+
+            <canvas id="chartTinhTrang"></canvas>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    new Chart(
+    document.getElementById("chartTinhTrang"),
+    {
+    type: "doughnut",
+
+    data:
+    {
+    labels:
+    @Html.Raw(ViewBag.Labels),
+
+    datasets:
+    [{
+    data:
+    @Html.Raw(ViewBag.Data),
+
+    backgroundColor:
+    [
+    "#198754",
+    "#ffc107",
+    "#dc3545"
+    ]
+    }]
+    },
+
+    options:
+    {
+    responsive: true,
+
+    plugins:
+    {
+    legend:
+    {
+    position: "bottom"
+    }
+    }
+    }
+
+    });
+
+</script>

@@ -1,0 +1,134 @@
+﻿@model IEnumerable<QUANLYCAYXANH.Models.ViewModels.ThongKeKhuVucVM>
+
+@{
+    ViewData["Title"] = "Thống kê theo khu vực";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<h2 class="mb-4">
+    📊 Thống kê cây xanh theo khu vực
+</h2>
+
+<div class="row mb-4">
+
+    <div class="col-md-6">
+
+        <div class="card border-primary shadow">
+
+            <div class="card-body text-center">
+
+                <h6>Tổng khu vực</h6>
+
+                <h2 class="text-primary">
+
+                    @ViewBag.TongKhuVuc
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="card border-success shadow">
+
+            <div class="card-body text-center">
+
+                <h6>Tổng cây xanh</h6>
+
+                <h2 class="text-success">
+
+                    @ViewBag.TongCay
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card shadow">
+
+    <div class="card-header bg-success text-white">
+
+        Biểu đồ số lượng cây xanh theo khu vực
+
+    </div>
+
+    <div class="card-body">
+
+        <canvas id="myChart" height="90"></canvas>
+
+    </div>
+
+</div>
+
+<script>
+
+    var labels =
+    @Html.Raw(ViewBag.Labels);
+
+    var data =
+    @Html.Raw(ViewBag.Data);
+
+    new Chart(
+    document.getElementById("myChart"),
+    {
+    type: "bar",
+
+    data:
+    {
+    labels: labels,
+
+    datasets:
+    [{
+    label: "Số lượng cây",
+
+    data: data,
+
+    backgroundColor: "#198754",
+
+    borderColor: "#198754",
+
+    borderRadius: 8,
+
+    borderWidth: 1
+    }]
+    },
+
+    options:
+    {
+    responsive: true,
+
+    plugins:
+    {
+    legend:
+    {
+    display: false
+    }
+    },
+
+    scales:
+    {
+    y:
+    {
+    beginAtZero: true,
+
+    ticks:
+    {
+    precision: 0
+    }
+    }
+    }
+    }
+
+    });
+
+</script>

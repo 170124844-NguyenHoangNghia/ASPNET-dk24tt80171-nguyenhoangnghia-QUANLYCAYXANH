@@ -1,0 +1,83 @@
+﻿@model IEnumerable<QUANLYCAYXANH.Models.LichSuChamSoc>
+
+<h2>Lịch sử chăm sóc cây xanh</h2>
+
+<div class="d-flex gap-2 mb-3">
+
+    @if (
+     Context.Session.GetString("VaiTro") == "Admin"
+     ||
+     Context.Session.GetString("VaiTro") == "NhanVien"
+ )
+    {
+        <a asp-action="Create"
+           class="btn btn-primary">
+            ➕ Thêm lịch sử chăm sóc
+        </a>
+    }
+
+    <a asp-action="ExportExcel"
+       class="btn btn-success">
+        📊 Xuất Excel
+    </a>
+
+</div>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>Cây xanh</th>
+            <th>Loại chăm sóc</th>
+            <th>Ngày chăm sóc</th>
+            <th>Ghi chú</th>
+            <th>Chức năng</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CayXanh?.TenCay</td>
+
+                <td>@item.LoaiChamSoc</td>
+
+                <td>
+                    @item.NgayChamSoc.ToString("dd/MM/yyyy")
+                </td>
+
+                <td>@item.GhiChu</td>
+                <td>
+
+                    @if (
+    Context.Session.GetString("VaiTro") == "Admin"
+    ||
+    Context.Session.GetString("VaiTro") == "NhanVien"
+)
+{
+                    <a asp-action="Edit"
+                       asp-route-id="@item.MaChamSoc"
+                       class="btn btn-warning btn-sm">
+
+                        Sửa
+
+                    </a>
+}
+                    @if (Context.Session.GetString("VaiTro") == "Admin")
+                    {
+                        <a asp-action="Delete"
+                           asp-route-id="@item.MaChamSoc"
+                           class="btn btn-danger btn-sm">
+                            Xóa
+                        </a>
+                    }
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>

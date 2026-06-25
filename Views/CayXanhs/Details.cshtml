@@ -1,0 +1,139 @@
+﻿@model QUANLYCAYXANH.Models.CayXanh
+
+<h2>Chi tiết cây xanh</h2>
+
+<div class="card">
+
+    <div class="card-header bg-success text-white">
+
+        Thông tin cây xanh
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th>Mã cây</th>
+                <td>@Model.MaCay</td>
+            </tr>
+
+            <tr>
+                <th>Tên cây</th>
+                <td>@Model.TenCay</td>
+            </tr>
+
+            <tr>
+                <th>Loài cây</th>
+                <td>@Model.LoaiCay</td>
+            </tr>
+
+            <tr>
+                <th>Ngày trồng</th>
+                <td>@Model.NgayTrong.ToString("dd/MM/yyyy")</td>
+            </tr>
+
+            <tr>
+                <th>Tình trạng</th>
+                <td>@Model.TinhTrang</td>
+            </tr>
+
+            <tr>
+                <th>Người phụ trách</th>
+                <td>@Model.NguoiPhuTrach</td>
+            </tr>
+
+            <tr>
+                <th>Khu vực</th>
+                <td>@Model.KhuVuc?.TenKhuVuc</td>
+            </tr>
+            <tr>
+                <th>Vĩ độ</th>
+                <td>@Model.ViDo</td>
+            </tr>
+
+            <tr>
+                <th>Kinh độ</th>
+                <td>@Model.KinhDo</td>
+            </tr>
+        </table>
+
+    </div>
+
+</div>
+
+<br />
+
+<div class="card">
+
+    <div class="card-header bg-info text-white">
+
+        Lịch sử chăm sóc
+
+    </div>
+
+    <div class="card-body">
+
+        @if (Model.LichSuChamSocs != null &&
+           Model.LichSuChamSocs.Any())
+        {
+            <table class="table table-bordered">
+
+                <thead>
+
+                    <tr>
+                        <th>Ngày chăm sóc</th>
+                        <th>Loại chăm sóc</th>
+                        <th>Ghi chú</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model.LichSuChamSocs
+                        .OrderByDescending(x => x.NgayChamSoc))
+                    {
+                        <tr>
+
+                            <td>
+                                @item.NgayChamSoc.ToString("dd/MM/yyyy")
+                            </td>
+
+                            <td>
+                                @item.LoaiChamSoc
+                            </td>
+
+                            <td>
+                                @item.GhiChu
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-warning">
+
+                Chưa có lịch sử chăm sóc
+
+            </div>
+        }
+
+    </div>
+
+</div>
+
+<br />
+
+<a asp-action="Index"
+   class="btn btn-secondary">
+
+    Quay lại
+
+</a>

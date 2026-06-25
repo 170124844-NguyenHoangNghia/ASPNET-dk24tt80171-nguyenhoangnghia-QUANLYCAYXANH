@@ -1,0 +1,49 @@
+﻿@model QUANLYCAYXANH.Models.LichSuChamSoc
+
+<h2>Xóa lịch chăm sóc</h2>
+
+<div class="alert alert-danger">
+
+    Bạn có chắc muốn xóa lịch chăm sóc này?
+
+</div>
+
+<table class="table">
+
+    <tr>
+        <th>Cây xanh</th>
+        <td>@Model.CayXanh?.TenCay</td>
+    </tr>
+
+    <tr>
+        <th>Loại chăm sóc</th>
+        <td>@Model.LoaiChamSoc</td>
+    </tr>
+
+    <tr>
+        <th>Ngày chăm sóc</th>
+        <td>@Model.NgayChamSoc.ToString("dd/MM/yyyy")</td>
+    </tr>
+
+</table>
+
+<form asp-action="Delete">
+
+    <input type="hidden"
+           asp-for="MaChamSoc" />
+
+    <button type="submit"
+            class="btn btn-danger">
+
+        Xóa
+
+    </button>
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+
+        Hủy
+
+    </a>
+
+</form>

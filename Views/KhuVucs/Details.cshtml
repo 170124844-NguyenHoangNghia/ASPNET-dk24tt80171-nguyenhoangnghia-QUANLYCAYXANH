@@ -1,0 +1,82 @@
+﻿@model QUANLYCAYXANH.Models.KhuVuc
+
+<h2>Chi tiết khu vực</h2>
+
+<div class="card mb-4">
+
+    <div class="card-body">
+
+        <h4>@Model.TenKhuVuc</h4>
+
+        <p>
+            <strong>Mã khu vực:</strong>
+            @Model.MaKhuVuc
+        </p>
+
+        <p>
+            <strong>Tổng số cây:</strong>
+            @(Model.CayXanhs?.Count() ?? 0)
+        </p>
+
+        <p>
+            <strong>Cây tốt:</strong>
+            @(Model.CayXanhs?.Count(x => x.TinhTrang == "Tốt") ?? 0)
+        </p>
+
+        <p>
+            <strong>Cần chăm sóc:</strong>
+            @(Model.CayXanhs?.Count(x => x.TinhTrang == "Cần chăm sóc") ?? 0)
+        </p>
+
+        <p>
+            <strong>Sâu bệnh:</strong>
+            @(Model.CayXanhs?.Count(x => x.TinhTrang == "Sâu bệnh") ?? 0)
+        </p>
+
+    </div>
+
+</div>
+
+<h4>Danh sách cây thuộc khu vực</h4>
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+
+        <tr>
+            <th>Mã cây</th>
+            <th>Tên cây</th>
+            <th>Loài cây</th>
+            <th>Tình trạng</th>
+            <th>Người phụ trách</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var cay in Model.CayXanhs ?? new List<QUANLYCAYXANH.Models.CayXanh>())
+        {
+            <tr>
+
+                <td>@cay.MaCay</td>
+
+                <td>@cay.TenCay</td>
+
+                <td>@cay.LoaiCay</td>
+
+                <td>@cay.TinhTrang</td>
+
+                <td>@cay.NguoiPhuTrach</td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+<a asp-action="Index"
+   class="btn btn-secondary">
+    Quay lại
+</a>

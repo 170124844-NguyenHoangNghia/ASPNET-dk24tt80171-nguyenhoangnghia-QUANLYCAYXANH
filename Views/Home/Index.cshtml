@@ -1,0 +1,315 @@
+﻿@model QUANLYCAYXANH.Models.ViewModels.DashboardVM
+
+@{
+    ViewData["Title"] = "Tổng quan";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h2>
+            🌳 TỔNG QUAN HỆ THỐNG QUẢN LÝ CÂY XANH
+        </h2>
+
+        <p class="text-muted">
+
+            Xin chào
+            <strong>
+                @Context.Session.GetString("TenDangNhap")
+            </strong>
+
+            (@Context.Session.GetString("VaiTro"))
+
+        </p>
+
+    </div>
+
+    <div class="text-end text-muted">
+
+        @DateTime.Now.ToString("dd/MM/yyyy")
+
+        <br />
+
+        @DateTime.Now.ToString("HH:mm")
+
+    </div>
+    
+</div>
+
+<!-- THỐNG KÊ HÀNG 1 -->
+
+<div class="row">
+
+    <div class="col-md-3 mb-3">
+        <div class="card border-success shadow-sm">
+            <div class="card-body text-center">
+                <h6>Tổng cây xanh</h6>
+                <h2>@Model.TongCay</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card border-primary shadow-sm">
+            <div class="card-body text-center">
+                <h6>Tổng khu vực</h6>
+                <h2>@Model.TongKhuVuc</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card border-info shadow-sm">
+            <div class="card-body text-center">
+                <h6>Lượt chăm sóc</h6>
+                <h2>@Model.TongChamSoc</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <a asp-controller="BaoCaoSuCos"
+           asp-action="Index"
+           class="text-decoration-none">
+
+            <div class="card bg-danger text-white shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h6>
+                        Phản ánh chưa xử lý
+                    </h6>
+
+                    <h2>
+                        @Model.BaoCaoChuaXuLy
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+    
+</div>
+
+<!-- THỐNG KÊ HÀNG 2 -->
+
+<div class="row">
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card border-warning shadow-sm">
+
+            <div class="card-body text-center">
+
+                <h6>Cần chăm sóc</h6>
+
+                <h2>
+                    @Model.CayCanChamSoc
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card border-danger shadow-sm">
+
+            <div class="card-body text-center">
+
+                <h6>Cây sâu bệnh</h6>
+
+                <h2>
+                    @Model.CaySauBenh
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card border-danger shadow-sm">
+
+            <div class="card-body text-center">
+
+                <h6>Quá hạn chăm sóc</h6>
+
+                <h2>
+                    @Model.CayQuaHanChamSoc
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- NÚT THAO TÁC NHANH -->
+
+<div class="mb-4">
+
+    @if (Context.Session.GetString("VaiTro") == "Admin")
+    {
+        <a asp-controller="CayXanhs"
+           asp-action="Create"
+           class="btn btn-success">
+
+            ➕ Thêm cây xanh
+
+        </a>
+    }
+
+    <a asp-controller="BaoCaoSuCos"
+       asp-action="Index"
+       class="btn btn-warning">
+
+        📢 Xử lý phản ánh
+
+    </a>
+
+    <a asp-controller="BanDo"
+       asp-action="Index"
+       class="btn btn-info">
+
+        🗺️ Xem bản đồ
+
+    </a>
+
+</div>
+
+<!-- THANH TỶ LỆ -->
+
+<div class="card mb-4">
+
+        <div class="card-header">
+
+        📈 Tình trạng cây xanh
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="progress" style="height:30px;">
+
+            <div class="progress-bar bg-success"
+                 style="width:@((Model.TongCay - Model.CayCanChamSoc - Model.CaySauBenh) * 100 / Math.Max(Model.TongCay, 1))%">
+
+                Tốt
+
+            </div>
+
+            <div class="progress-bar bg-warning"
+                 style="width:@(Model.CayCanChamSoc * 100 / Math.Max(Model.TongCay, 1))%">
+
+                Cần chăm sóc
+
+            </div>
+
+            <div class="progress-bar bg-danger"
+                 style="width:@(Model.CaySauBenh * 100 / Math.Max(Model.TongCay, 1))%">
+
+                Sâu bệnh
+
+            </div>
+
+        </div>
+
+    </div>
+    
+</div>
+
+<!-- CẢNH BÁO -->
+@if (Model.CayCanChamSoc > 0
+|| Model.CaySauBenh > 0
+|| Model.CayQuaHanChamSoc > 0
+|| Model.BaoCaoChuaXuLy > 0)
+{
+    <div class="alert alert-warning border border-danger shadow-sm mt-3">
+                
+        <h4 class="text-danger">
+
+            ⚠ CẢNH BÁO HỆ THỐNG
+
+        </h4>
+
+        <ul>
+
+            @if (Model.CayCanChamSoc > 0)
+            {
+                <li>
+                    Có <strong>@Model.CayCanChamSoc</strong>
+                    cây đang ở trạng thái cần chăm sóc.
+                </li>
+            }
+
+            @if (Model.CaySauBenh > 0)
+            {
+                <li>
+                    Có <strong>@Model.CaySauBenh</strong>
+                    cây đang bị sâu bệnh.
+                </li>
+            }
+
+            @if (Model.CayQuaHanChamSoc > 0)
+            {
+                <li>
+                    Có <strong>@Model.CayQuaHanChamSoc</strong>
+                    cây quá 30 ngày chưa được chăm sóc.
+                </li>
+            }
+
+            @if (Model.BaoCaoChuaXuLy > 0)
+            {
+                <li>
+                    Có <strong>@Model.BaoCaoChuaXuLy</strong>
+                    phản ánh từ người dân chưa được xử lý.
+                </li>
+            }
+
+        </ul>
+
+        <div class="mt-3">
+
+            <a asp-controller="Home"
+               asp-action="CanhBao"
+               class="btn btn-danger">
+
+                Xem chi tiết cảnh báo
+
+            </a>
+
+            <a asp-controller="BaoCaoSuCos"
+               asp-action="Index"
+               class="btn btn-warning">
+
+                Xem phản ánh
+
+            </a>
+
+        </div>
+
+    </div>
+
+}
+else
+{
+
+    <div class="alert alert-success mt-3">
+
+        ✓ Tất cả cây xanh đang được quản lý và chăm sóc đúng quy định.
+
+    </div>
+
+}

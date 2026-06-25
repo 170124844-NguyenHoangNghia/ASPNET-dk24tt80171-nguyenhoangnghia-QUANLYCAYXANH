@@ -1,0 +1,61 @@
+﻿@model QUANLYCAYXANH.Models.LichSuChamSoc
+
+<h2>Thêm lịch chăm sóc</h2>
+
+<form asp-action="Create">
+
+    <div class="mb-3">
+
+        <label>Cây xanh</label>
+
+        <select asp-for="MaCay"
+                asp-items="ViewBag.MaCay"
+                class="form-control">
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Loại chăm sóc</label>
+
+        <select asp-for="LoaiChamSoc"
+                class="form-control">
+
+            <option>Tưới nước</option>
+            <option>Bón phân</option>
+            <option>Cắt tỉa</option>
+            <option>Thay đất</option>
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Ngày chăm sóc</label>
+
+        <input asp-for="NgayChamSoc"
+               type="date"
+               class="form-control" />
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Ghi chú</label>
+
+        <textarea asp-for="GhiChu"
+                  class="form-control">
+        </textarea>
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-success">
+
+        Lưu
+
+    </button>
+
+</form>

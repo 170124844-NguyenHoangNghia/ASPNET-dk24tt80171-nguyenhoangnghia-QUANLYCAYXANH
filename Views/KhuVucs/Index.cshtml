@@ -1,0 +1,56 @@
+﻿@model IEnumerable<QUANLYCAYXANH.Models.KhuVuc>
+
+<h2>Danh sách khu vực</h2>
+
+<p>
+    @if (Context.Session.GetString("VaiTro") == "Admin")
+    {
+        <a asp-action="Create" class="btn btn-primary">
+            ➕ Thêm khu vực
+        </a>
+    }
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Mã KV</th>
+            <th>Tên khu vực</th>
+            <th>Mô tả</th>
+            <th>Chức năng</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaKhuVuc</td>
+                <td>@item.TenKhuVuc</td>
+                <td>@item.MoTa</td>
+
+                <td>
+                    <a asp-action="Details"
+                       asp-route-id="@item.MaKhuVuc"
+                       class="btn btn-info btn-sm">
+                        Chi tiết
+                    </a>
+                    @if (Context.Session.GetString("VaiTro") == "Admin")
+                    {
+                        <a asp-action="Edit"
+                           asp-route-id="@item.MaKhuVuc"
+                           class="btn btn-warning btn-sm">
+                            Sửa
+                        </a>
+
+                        <a asp-action="Delete"
+                           asp-route-id="@item.MaKhuVuc"
+                           class="btn btn-danger btn-sm">
+                            Xóa
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

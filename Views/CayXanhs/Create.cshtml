@@ -1,0 +1,59 @@
+﻿@model QUANLYCAYXANH.Models.CayXanh
+
+<h2>Thêm cây xanh</h2>
+
+<form asp-action="Create">
+
+    <div class="mb-3">
+        <label>Tên cây</label>
+        <input asp-for="TenCay" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Loài cây</label>
+        <input asp-for="LoaiCay" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Ngày trồng</label>
+        <input asp-for="NgayTrong"
+               type="date"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Tình trạng</label>
+        <input asp-for="TinhTrang"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Người phụ trách</label>
+        <input asp-for="NguoiPhuTrach"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Khu vực</label>
+
+        <select asp-for="MaKhuVuc"
+                asp-items="ViewBag.MaKhuVuc"
+                class="form-control">
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ViDo">Vĩ độ</label>
+        <input asp-for="ViDo" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="KinhDo">Kinh độ</label>
+        <input asp-for="KinhDo" class="form-control" />
+    </div>
+    <button type="submit"
+            class="btn btn-success">
+        Lưu
+    </button>
+
+</form>

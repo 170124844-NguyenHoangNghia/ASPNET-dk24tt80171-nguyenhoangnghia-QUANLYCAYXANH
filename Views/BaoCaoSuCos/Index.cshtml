@@ -1,0 +1,93 @@
+﻿@model IEnumerable<QUANLYCAYXANH.Models.BaoCaoSuCo>
+
+<h2>Danh sách phản ánh từ người dân</h2>
+
+<table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+
+        <tr>
+            <th>STT</th>
+            <th>Tên cây</th>
+            <th>Người báo cáo</th>
+            <th>SĐT</th>
+            <th>Nội dung</th>
+            <th>Ngày báo cáo</th>
+            <th>Trạng thái</th>
+            <th>Chức năng</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @{
+            int stt = 1;
+        }
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>@stt</td>
+
+                <td>
+                    @item.CayXanh?.TenCay
+                </td>
+
+                <td>
+                    @item.NguoiBaoCao
+                </td>
+
+                <td>
+                    @item.SoDienThoai
+                </td>
+
+                <td>
+                    @item.NoiDung
+                </td>
+
+                <td>
+                    @item.NgayBaoCao.ToString("dd/MM/yyyy")
+                </td>
+
+                <td>
+
+                    @if (item.TrangThai == "Đã xử lý")
+                    {
+                        <span class="badge bg-success">
+                            Đã xử lý
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">
+                            Chưa xử lý
+                        </span>
+                    }
+
+                </td>
+
+                <td>
+
+                    @if (item.TrangThai != "Đã xử lý")
+                    {
+                        <a asp-action="XuLy"
+                           asp-route-id="@item.MaBaoCao"
+                           class="btn btn-success btn-sm">
+
+                            Đã xử lý
+
+                        </a>
+                    }
+
+                </td>
+
+            </tr>
+
+            stt++;
+        }
+
+    </tbody>
+
+</table>

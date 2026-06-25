@@ -1,0 +1,359 @@
+﻿@using Microsoft.AspNetCore.Http
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Hệ thống quản lý cây xanh</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/QUANLYCAYXANH.styles.css" asp-append-version="true" />
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
+
+            <div class="container-fluid">
+
+                @if (Context.Session.GetString("TenDangNhap") == null)
+                {
+                    <a class="navbar-brand fw-bold"
+                       asp-controller="TraCuu"
+                       asp-action="Index">
+
+                        🌳 QUẢN LÝ CÂY XANH TVU
+
+                    </a>
+                }
+                else
+                {
+                    <a class="navbar-brand fw-bold"
+                       asp-controller="Home"
+                       asp-action="Index">
+
+                        🌳 QUẢN LÝ CÂY XANH TVU
+
+                    </a>
+                }
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarMain">
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+                <div class="collapse navbar-collapse"
+                     id="navbarMain">
+
+                    <!-- MENU TRÁI -->
+
+                    <ul class="navbar-nav me-auto">
+
+                        @if (Context.Session.GetString("TenDangNhap") == null)
+                        {
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="TraCuu"
+                                   asp-action="Index">
+
+                                    🔎 Tra cứu
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="BanDo"
+                                   asp-action="Index">
+
+                                    🗺️ Bản đồ
+
+                                </a>
+
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="Home"
+                                   asp-action="Index">
+
+                                    📊 Tổng quan
+
+                                </a>
+
+                            </li>
+
+                            <!-- QUẢN LÝ -->
+
+                            <li class="nav-item dropdown">
+
+                                <a class="nav-link dropdown-toggle"
+                                   href="#"
+                                   id="quanLyDropdown"
+                                   role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+
+                                    📂 Quản lý
+
+                                </a>
+
+                                <ul class="dropdown-menu">
+
+                                    <li>
+
+                                        <a class="dropdown-item"
+                                           asp-controller="CayXanhs"
+                                           asp-action="Index">
+
+                                            🌳 Cây xanh
+
+                                        </a>
+
+                                    </li>
+
+                                    @if (Context.Session.GetString("VaiTro") == "Admin")
+                                    {
+                                        <li>
+
+                                            <a class="dropdown-item"
+                                               asp-controller="KhuVucs"
+                                               asp-action="Index">
+
+                                                📍 Khu vực
+
+                                            </a>
+
+                                        </li>
+                                    }
+
+                                    <li>
+
+                                        <a class="dropdown-item"
+                                           asp-controller="LichSuChamSocs"
+                                           asp-action="Index">
+
+                                            📝 Chăm sóc
+
+                                        </a>
+
+                                    </li>
+
+                                </ul>
+
+                            </li>
+
+                            <!-- THỐNG KÊ -->
+
+                            <li class="nav-item dropdown">
+
+                                <a class="nav-link dropdown-toggle"
+                                   href="#"
+                                   id="thongKeDropdown"
+                                   role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+
+                                    📈 Thống kê
+
+                                </a>
+
+                                <ul class="dropdown-menu">
+
+                                    <li>
+
+                                        <a class="dropdown-item"
+                                           asp-controller="Home"
+                                           asp-action="ThongKeKhuVuc">
+
+                                            📊 Theo khu vực
+
+                                        </a>
+
+                                    </li>
+
+                                    <li>
+
+                                        <a class="dropdown-item"
+                                           asp-controller="Home"
+                                           asp-action="ThongKeTinhTrang">
+
+                                            📊 Theo tình trạng
+
+                                        </a>
+
+                                    </li>
+
+                                    <li>
+
+                                        <a class="dropdown-item"
+                                           asp-controller="Home"
+                                           asp-action="ThongKeChamSoc">
+
+                                            📈 Chăm sóc theo tháng
+
+                                        </a>
+
+                                    </li>
+
+                                </ul>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="Home"
+                                   asp-action="CanhBao">
+
+                                    ⚠️ Cảnh báo
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="BaoCaoSuCos"
+                                   asp-action="Index">
+
+                                    📢 Phản ánh
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="BanDo"
+                                   asp-action="Index">
+
+                                    🗺️ Bản đồ
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="TraCuu"
+                                   asp-action="Index">
+
+                                    🔎 Tra cứu
+
+                                </a>
+
+                            </li>
+                        }
+
+                    </ul>
+
+                    <!-- MENU PHẢI -->
+
+                    <ul class="navbar-nav">
+
+                        @if (Context.Session.GetString("TenDangNhap") == null)
+                        {
+                            <li class="nav-item">
+
+                                <a class="nav-link fw-bold"
+                                   asp-controller="Login"
+                                   asp-action="Index">
+
+                                    🔐 Đăng nhập
+
+                                </a>
+
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+
+                                @{
+                                    string vaiTro = Context.Session.GetString("VaiTro") ?? "";
+
+                                    if (vaiTro == "Admin")
+                                    {
+                                        vaiTro = "Quản trị viên";
+                                    }
+                                    else if (vaiTro == "NhanVien")
+                                    {
+                                        vaiTro = "Nhân viên";
+                                    }
+                                }
+
+                                <span class="nav-link text-warning fw-bold">
+                                    👤 @vaiTro
+                                </span>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link text-white fw-bold"
+                                   asp-controller="Login"
+                                   asp-action="Logout">
+
+                                    🚪 Đăng xuất
+
+                                </a>
+
+                            </li>
+                        }
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <div class="container mt-3">
+
+        <main role="main" class="pb-3">
+
+            @RenderBody()
+
+        </main>
+
+    </div>
+
+    <footer class="border-top mt-5 py-3 text-center text-muted">
+
+        🌳 Hệ thống quản lý cây xanh TVU |
+        ASP.NET Core MVC |
+        © 2026
+
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

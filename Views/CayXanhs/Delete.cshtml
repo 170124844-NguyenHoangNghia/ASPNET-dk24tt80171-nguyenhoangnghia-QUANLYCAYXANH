@@ -1,0 +1,30 @@
+﻿@model QUANLYCAYXANH.Models.CayXanh
+
+<h2>Xóa cây xanh</h2>
+
+<h4>Bạn có chắc chắn muốn xóa cây này?</h4>
+
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-3">Tên cây</dt>
+    <dd class="col-sm-9">@Model.TenCay</dd>
+
+    <dt class="col-sm-3">Loại cây</dt>
+    <dd class="col-sm-9">@Model.LoaiCay</dd>
+
+    <dt class="col-sm-3">Tình trạng</dt>
+    <dd class="col-sm-9">@Model.TinhTrang</dd>
+</dl>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="MaCay" />
+
+    <button type="submit" class="btn btn-danger">
+        Xóa
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Hủy
+    </a>
+</form>

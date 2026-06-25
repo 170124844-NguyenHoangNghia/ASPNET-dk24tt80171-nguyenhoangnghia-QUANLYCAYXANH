@@ -1,0 +1,40 @@
+﻿@model QUANLYCAYXANH.Models.BaoCaoSuCo
+
+<h2>Báo cáo cây cần chăm sóc</h2>
+
+<form method="post">
+
+    <input type="hidden"
+           asp-for="MaCay"
+           value="@ViewBag.MaCay" />
+
+    <div class="mb-3">
+        <label>Tên cây</label>
+        <input class="form-control"
+               value="@ViewBag.TenCay"
+               readonly />
+    </div>
+
+    <div class="mb-3">
+        <label>Người báo cáo</label>
+        <input asp-for="NguoiBaoCao"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Số điện thoại</label>
+        <input asp-for="SoDienThoai"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Nội dung phản ánh</label>
+        <textarea asp-for="NoiDung"
+                  class="form-control"></textarea>
+    </div>
+
+    <button class="btn btn-danger">
+        Gửi báo cáo
+    </button>
+
+</form>

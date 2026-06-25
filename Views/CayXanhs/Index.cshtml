@@ -1,0 +1,169 @@
+﻿@model IEnumerable<QUANLYCAYXANH.Models.CayXanh>
+
+<h2>Danh sách cây xanh</h2>
+<form method="get" class="row mb-4">
+
+    <div class="col-md-3">
+        <input type="text"
+               name="searchString"
+               class="form-control"
+               placeholder="Nhập tên cây..."
+               value="@Context.Request.Query["searchString"]" />
+    </div>
+
+    <div class="col-md-3">
+        <select name="maKhuVuc"
+                class="form-control">
+
+            <option value="">
+                -- Tất cả khu vực --
+            </option>
+
+            @foreach (var kv in ViewBag.KhuVucs)
+            {
+                <option value="@kv.MaKhuVuc">
+                    @kv.TenKhuVuc
+                </option>
+            }
+
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <select name="tinhTrang"
+                class="form-control">
+
+            <option value="">
+                -- Tất cả tình trạng --
+            </option>
+
+            <option value="Tốt">
+                Tốt
+            </option>
+
+            <option value="Cần chăm sóc">
+                Cần chăm sóc
+            </option>
+
+            <option value="Sâu bệnh">
+                Sâu bệnh
+            </option>
+
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <button type="submit"
+                class="btn btn-primary w-100">
+
+            🔍 Tìm kiếm
+
+        </button>
+    </div>
+
+</form>
+<p>
+    <div class="d-flex gap-2 mb-3">
+
+        @if (Context.Session.GetString("VaiTro") == "Admin")
+{
+    <a asp-action="Create"
+       class="btn btn-primary">
+
+        ➕ Thêm cây xanh
+
+    </a>
+}
+
+        <a asp-action="ExportExcel"
+           asp-route-searchString="@Context.Request.Query["searchString"]"
+           asp-route-maKhuVuc="@Context.Request.Query["maKhuVuc"]"
+           asp-route-tinhTrang="@Context.Request.Query["tinhTrang"]"
+           class="btn btn-success">
+
+            📊 Xuất Excel
+
+        </a>
+
+    </div>
+</p>
+<table class="table table-bordered table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Mã</th>
+            <th>Tên cây</th>
+            <th>Loài cây</th>
+            <th>Ngày trồng</th>
+            <th>Tình trạng</th>
+            <th>Người phụ trách</th>
+            <th>Khu vực</th>
+            <th class="text-center" style="width:230px">
+                Chức năng
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaCay</td>
+                <td>@item.TenCay</td>
+                <td>@item.LoaiCay</td>
+                <td>@item.NgayTrong.ToString("dd/MM/yyyy")</td>
+                <td>
+
+                    @if (item.TinhTrang == "Tốt")
+                    {
+                        <span class="badge bg-success">
+                            Tốt
+                        </span>
+                    }
+                    else if (item.TinhTrang == "Cần chăm sóc")
+                    {
+                        <span class="badge bg-warning text-dark">
+                            Cần chăm sóc
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">
+                            @item.TinhTrang
+                        </span>
+                    }
+
+                </td>
+                <td>@item.NguoiPhuTrach</td>
+                <td>@item.KhuVuc?.TenKhuVuc</td>                                 
+                <td class="text-center">
+
+                            <div class="btn-group" role="group">
+
+                                <a asp-action="Details"
+                                   asp-route-id="@item.MaCay"
+                                   class="btn btn-info btn-sm">
+                                    Chi tiết
+                                </a>
+                                
+                                @if (Context.Session.GetString("VaiTro") == "Admin")
+                                {
+                                    <a asp-action="Edit"
+                                    asp-route-id="@item.MaCay"
+                                    class="btn btn-warning btn-sm">
+                                    Sửa
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                    asp-route-id="@item.MaCay"
+                                    class="btn btn-danger btn-sm">
+                                    Xóa
+                                    </a>
+                                }
+                               
+
+                            </div>                                         
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,147 @@
+﻿@model IEnumerable<QUANLYCAYXANH.Models.CayXanh>
+
+@using System.Text.Json
+
+<h2>🗺️ Bản đồ cây xanh</h2>
+
+<div class="mb-3">
+    
+    <span class="badge bg-success fs-6">
+        🟢 Tốt (@Model.Count(x => x.TinhTrang == "Tốt"))
+    </span>
+
+    <span class="badge bg-warning text-dark fs-6">
+        🟡 Cần chăm sóc (@Model.Count(x => x.TinhTrang == "Cần chăm sóc"))
+    </span>
+
+    <span class="badge bg-danger fs-6">
+        🔴 Sâu bệnh (@Model.Count(x => x.TinhTrang == "Sâu bệnh"))
+    </span>
+
+</div>
+
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<div id="map" style="height:600px;"></div>
+
+@{
+    var data = Model
+    .Where(x => x.ViDo != null && x.KinhDo != null)
+    .Select(x => new
+    {
+        maCay = x.MaCay,
+        ten = x.TenCay,
+        loai = x.LoaiCay,
+        tinhTrang = x.TinhTrang,
+        khuVuc = x.KhuVuc != null ? x.KhuVuc.TenKhuVuc : "",
+        nguoiPhuTrach = x.NguoiPhuTrach,
+        viDo = x.ViDo,
+        kinhDo = x.KinhDo
+    });
+
+
+var json = JsonSerializer.Serialize(data);
+
+
+}
+
+<script>
+
+    var map = L.map('map').setView(
+    [10.7807, 106.6992],
+    13
+    );
+
+    L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+    attribution: '&copy; OpenStreetMap'
+    }
+    ).addTo(map);
+
+    var cayXanhs =
+    @Html.Raw(json);
+    var daDangNhap =
+    @Html.Raw(
+        ((bool)ViewBag.DaDangNhap)
+        .ToString()
+        .ToLower()
+    );
+    var greenIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41]
+    });
+
+    var yellowIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41]
+    });
+
+    var redIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41]
+    });
+
+    var bounds = [];
+
+    cayXanhs.forEach(function (cay)
+    {
+    var icon = greenIcon;
+
+    if (cay.tinhTrang === "Cần chăm sóc")
+    {
+    icon = yellowIcon;
+    }
+    else if (cay.tinhTrang === "Sâu bệnh")
+    {
+    icon = redIcon;
+    }
+
+    var popupContent =
+    "<b>🌳 " + cay.ten + "</b><br>" +
+    "Loài: " + cay.loai + "<br>" +
+    "Tình trạng: " + cay.tinhTrang + "<br>" +
+    "Khu vực: " + cay.khuVuc;
+
+    if (daDangNhap)
+    {
+    popupContent +=
+    "<br>Người phụ trách: " +
+    (cay.nguoiPhuTrach ?? "") +
+
+    "<br><br>" +
+
+    "<a href='/CayXanhs/Details/" +
+    cay.maCay +
+    "' class='btn btn-primary btn-sm'>" +
+    "Xem chi tiết" +
+    "</a>";
+    }
+
+    L.marker(
+    [cay.viDo, cay.kinhDo],
+    { icon: icon }
+    )
+    .addTo(map)
+    .bindPopup(popupContent);
+
+    bounds.push(
+    [cay.viDo, cay.kinhDo]
+    );
+    });
+
+    if (bounds.length > 0)
+    {
+    map.fitBounds(bounds);
+    }
+
+</script>
