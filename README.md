@@ -80,3 +80,7 @@ src/
 
 Nguyễn Hoàng Nghĩa
 
+Sinh viên ngành Công nghệ thông tin
+
+Trường Đại học Trà Vinh
+
