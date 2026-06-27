@@ -28,9 +28,7 @@ Hệ thống hỗ trợ quản lý thông tin cây xanh, khu vực, lịch sử 
 * Cảnh báo
 * Xuất dữ liệu Excel
 
-## \## Cấu trúc Repository
-
-## 
+## Cấu trúc Repository
 
 setup/
 
