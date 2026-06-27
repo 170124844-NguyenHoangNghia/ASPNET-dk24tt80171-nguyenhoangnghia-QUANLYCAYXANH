@@ -1,0 +1,11 @@
+HỆ THỐNG QUẢN LÝ CÂY XANH
+
+Tài khoản quản trị
+
+Tên đăng nhập: admin
+Mật khẩu: 123
+
+Tài khoản nhân viên
+
+Tên đăng nhập: user
+Mật khẩu: 123
