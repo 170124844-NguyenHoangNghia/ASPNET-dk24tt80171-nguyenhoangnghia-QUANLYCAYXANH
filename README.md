@@ -3,6 +3,7 @@
 ## Giới thiệu
 
 Đây là đồ án xây dựng website quản lý cây xanh trong Trường Đại học Trà Vinh.
+Hệ thống hỗ trợ quản lý thông tin cây xanh, khu vực, lịch sử chăm sóc, thống kê, cảnh báo, phản ánh sự cố và tra cứu vị trí cây trên bản đồ.
 
 ## Công nghệ sử dụng
 
@@ -12,6 +13,7 @@
 - Bootstrap 5
 - Leaflet
 - Chart.js
+- OpenStreetMap
 
 ## Chức năng
 
@@ -25,6 +27,24 @@
 - Thống kê
 - Cảnh báo
 - Xuất dữ liệu Excel
+
+## Cấu trúc Repository
+
+setup/
+    Database/
+    HuongDanCaiDat.pdf
+    TaiKhoanTest.txt
+
+thesis/
+    doc/
+    pdf/
+
+src/
+    Controllers/
+    Models/
+    Views/
+    Data/
+    wwwroot/
 
 ## Tác giả
 
