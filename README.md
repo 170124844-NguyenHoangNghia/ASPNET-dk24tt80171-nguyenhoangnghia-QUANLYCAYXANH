@@ -30,28 +30,32 @@ Hệ thống hỗ trợ quản lý thông tin cây xanh, khu vực, lịch sử 
 
 ## Cấu trúc Repository
 
-setup/
-└── Database/
-    ├── QuanLyCayXanh.sql
-    ├── HuongDanCaiDat.pdf
-    └── TaiKhoanTest.txt
-
-thesis/
-├── doc/
-└── pdf/
-
-src/
-└── QUANLYCAYXANH/
-    ├── Controllers/
-    ├── Data/
-    ├── Migrations/
-    ├── Models/
-    ├── Properties/
-    ├── Views/
-    ├── wwwroot/
-    ├── Program.cs
-    ├── appsettings.json
-    └── QUANLYCAYXANH.csproj
+├── setup
+│   └── Database
+│       ├── QuanLyCayXanh.sql
+│       ├── HuongDanCaiDat.pdf
+│       └── TaiKhoanTest.txt
+│
+├── thesis
+│   ├── doc
+│   └── pdf
+│
+├── src
+│   └── QUANLYCAYXANH
+│       ├── Controllers
+│       ├── Data
+│       ├── Migrations
+│       ├── Models
+│       ├── Properties
+│       ├── Views
+│       ├── wwwroot
+│       ├── Program.cs
+│       ├── appsettings.json
+│       └── QUANLYCAYXANH.csproj
+│
+├── .gitignore
+├── QUANLYCAYXANH.slnx
+└── README.md
 
 ## Tác giả
 
