@@ -30,6 +30,8 @@ Hệ thống hỗ trợ quản lý thông tin cây xanh, khu vực, lịch sử 
 
 ## Cấu trúc Repository
 
+```text
+.
 ├── setup
 │   └── Database
 │       ├── QuanLyCayXanh.sql
@@ -56,6 +58,7 @@ Hệ thống hỗ trợ quản lý thông tin cây xanh, khu vực, lịch sử 
 ├── .gitignore
 ├── QUANLYCAYXANH.slnx
 └── README.md
+```
 
 ## Tác giả
 
