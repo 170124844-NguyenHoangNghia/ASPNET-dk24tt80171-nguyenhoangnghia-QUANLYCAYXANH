@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DELL\\source\\repos\\QUANLYCAYXANH\\QUANLYCAYXANH\\QUANLYCAYXANH.csproj": {}
+    "C:\\Users\\DELL\\source\\repos\\QUANLYCAYXANH\\src\\QUANLYCAYXANH\\QUANLYCAYXANH.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DELL\\source\\repos\\QUANLYCAYXANH\\QUANLYCAYXANH\\QUANLYCAYXANH.csproj": {
+    "C:\\Users\\DELL\\source\\repos\\QUANLYCAYXANH\\src\\QUANLYCAYXANH\\QUANLYCAYXANH.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DELL\\source\\repos\\QUANLYCAYXANH\\QUANLYCAYXANH\\QUANLYCAYXANH.csproj",
+        "projectUniqueName": "C:\\Users\\DELL\\source\\repos\\QUANLYCAYXANH\\src\\QUANLYCAYXANH\\QUANLYCAYXANH.csproj",
         "projectName": "QUANLYCAYXANH",
-        "projectPath": "C:\\Users\\DELL\\source\\repos\\QUANLYCAYXANH\\QUANLYCAYXANH\\QUANLYCAYXANH.csproj",
+        "projectPath": "C:\\Users\\DELL\\source\\repos\\QUANLYCAYXANH\\src\\QUANLYCAYXANH\\QUANLYCAYXANH.csproj",
         "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DELL\\source\\repos\\QUANLYCAYXANH\\QUANLYCAYXANH\\obj\\",
+        "outputPath": "C:\\Users\\DELL\\source\\repos\\QUANLYCAYXANH\\src\\QUANLYCAYXANH\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
